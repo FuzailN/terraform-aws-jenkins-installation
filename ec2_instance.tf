@@ -8,7 +8,9 @@ resource "aws_instance" "jenkins_instance" {
   }
 }
 
-resource "null_resource" "jenkins_setup" {  
+resource "null_resource" "jenkins_setup" { 
+    depends_on = [aws_instance.jenkins_instance]
+ 
   connection {
     type        = "ssh"
     private_key = file("keypair.pem")
